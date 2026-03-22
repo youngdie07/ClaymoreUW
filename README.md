@@ -1,151 +1,111 @@
-# Debris-fluid-structure interaction simulation using ClaymoreUW 
-## How to customize claymoreUW   
-The main purpose of this documentation is to understand: 
-- how you can customize input data, e.g., experimental setups and sensor settings;
-- how to run ClaymoreUW through supercomputer, specifically in Lonestar 6 of TACC at UT Austin;
-- how to analyze the output files 
+# ClaymoreUW Setup Guide (On Update)
 
-Please check the pptx files to understand the details. 
-This is a modified fork of JustinBonus/claymore. The details not mentioned in this document are mostly illustrated in the original repository. 
+## 1. Register TACC Account & Allocation
+- Request access from your PI
+- Remember your TACC ID/PW and activate **Duo MFA** for future log-in
 
-# ClaymoreUW
-## Claymore for Engineering Projects - Multi-GPU Material Point Method 
+---
 
-Authors:
-[Justin Bonus](https://github.com/JustinBonus)\, 
-[Pedro Arduino](https://github.com/parduino)
+## 2. Download Software (Free Version)
+| Software | Download Link |
+|----------|--------------|
+| Cursor | https://cursor.com/download |
+| Cyberduck | https://cyberduck.io/download/ |
+| Houdini | https://www.sidefx.com/get/try-houdini/ |
 
-<div align="left">
-    <a href="https://claymore.readthedocs.io/en/latest/"> Documentation </a>
-</div>
+---
 
-## Data-Repositories
+## 3. Connecting via SSH
 
-Comparison data of ClaymoreUW MPM to DualSPHysics SPH and STAR-CCM+ CFD against stochastic experiments by Goserberg et al. 2016. For comparison details, see [Bonus et al. 2025](https://doi.org/10.1016/j.coastaleng.2024.104672), "Tsunami Debris Motion and Loads in a Scaled Port Setting: Comparative Analysis of Three State-of-the-Art Numerical Methods Against Experiments", published in Coastal Engineering.
+1. Open **Cursor**
+2. Connect via SSH → Add new SSH host
+   - **Hostname (Server):** `ls6.tacc.utexas.edu`
+   - **Port:** `22`
+   - **Username:** your TACC ID
+3. Log in with your TACC password and approve via **Duo App**
+4. Open a Terminal (bash) window in Cursor
+   - Run `pwd` to confirm your current directory
+   - Navigate to your scratch directory:
+```bash
+     cd /scratch/your_number/[TACCID]
+```
 
-[DesignSafe DataDepot Repository](https://www.designsafe-ci.org/data/browser/public/designsafe.storage.published/PRJ-5846)
+---
 
-## Description
+## 4. Clone & Compile GitHub Repository
 
-Opensource code for Multi-GPU MPM. It is a modified fork from opensource code [page](https://github.com/penn-graphics-research/claymore) for the SIGGRAPH 2020 paper:
+### Clone
+```bash
+git clone https://github.com/youngdie07/ClaymoreUW.git
+ls  # Verify that the "claymoreUW" folder exists
+```
 
-**A Massively Parallel and Scalable Multi-GPU Material Point Method** 
-
-[page](https://sites.google.com/view/siggraph2020-multigpu)\, [pdf](https://www.seas.upenn.edu/~cffjiang/research/wang2020multigpu/wang2020multigpu.pdf)\, [supp](https://www.seas.upenn.edu/~cffjiang/research/wang2020multigpu/supp.pdf)\, [video](https://vimeo.com/414136257)
-
-
-<!--
-<p float="left">
-<img src="Data/Clips/faceless.gif" height="128px"/>
-<img src="Data/Clips/flow.gif" height="128px"/>
-<img src="Data/Clips/chains.gif" height="128px"/>
-<img src="Data/Clips/cat.gif" height="128px"/>
-</p>
--->
-
-## Compilation
-This is a cross-platform C++/CUDA cmake project. The minimum version requirement of cmake is 3.16, yet the latest version is generally recommended. The required CUDA version is 10.2 or 11.
-
-Currently, *supported OS* includes Windows 10 and Ubuntu (>=18.04), and *tested compilers* includes gcc8.4, msvc v142, clang-9 (includes msvc version). 
+### Set Modules
+```bash
+module load cmake/3.24.2
+module load cuda/12.2
+module load gcc/12.2.0
+```
 
 ### Build
-Run the following command in the *root directory*. Note that adding "--config Release" to the last command is needed when compiling using msvc.
-```mkdir build
+```bash
+cd claymoreUW
+mkdir build
 cd build
 cmake ..
 cmake --build .
 ```
 
-Or configure the project using the *CMake Tools* extension in *Visual Studio Code* (recommended).
+### Compile
+> ⚠️ Compilation generally takes **30+ minutes** and may require troubleshooting depending on your system.
 
-### Formulation
-
-> Time-Integration (Explicit)
-> Material models (Fixed-corotated, NA Cam-Clay, Drucker-Prager, Weakly Comp. Fluid)
-> Shape Function (2nd Order B-Spline)
-> Transfer Scheme (Affine Particle-In-Cell)
-> Kernel (Grid-to-Particle-to-Grid)
-
-### Input
-
-JSON input files are used to configure some simulation settings.
-
-Currently, binary position data and the level-set (signed distance field) [data](https://github.com/littlemine/Data) are accepted as input files for particles. Uniformly sampling particles from analytic geometries is another viable way for the initialization of models.
-
-Starting from an \*.obj or \*.stl file, SDFGen [page](https://github.com/wdas/SDFGen) can make appropiate \*.sdf files. 
-
-### Output
-
-Particle output includes 
-> Position (x, y, z)
-> Stress ($\sigma_{1}$, $\sigma_{2}$, $\sigma_{3}$)
-> Deformation Gradient ($J = ||F||$)
-
-Particle data is segmented by object and device.
-
-Grid output includes
-> Index (x, y, z)
-> Mass (m)
-> Momentum ($M_{x}$, $M_{y}$, $M_{z}$)
-
-Grid data is dynamic (inactive cells not included) and down-sampled (one block output per 4x4x4 cells)
-
-Outputs are binary geometry files (\*.bgeo). Houdini Apprentice can render these efficiently.
-
-
-### Run Demos
-The project provides the following GPU-based schemes for MPM:
-- **GMPM**: Improved single-GPU pipeline
-- **MGSP**: Static geometry (particle) partitioning multi-GPU pipeline
-- **WASIRF**: Single-GPU simulation of flume experiments. 
-<!--
-- dynamic spatial partitioning multi-GPU pipeline
--->
-
-Go to *Projects/\*\**, run the executable.
-
-## Code Usage
-> Use the codebase in another cmake c++ project.
-
-Directly include the codebase as a submodule, and follow the examples in the *Projects*.
-
-> Develop upon the codebase.
-
-Create a sub-folder in *Projects* with a cmake file at its root.
-
-## Bibtex
-
-Please cite the original paper if you use this code for your research: 
-```
-@article{Wang2020multiGMPM,
-    author = {Xinlei Wang* and Yuxing Qiu* and Stuart R. Slattery and Yu Fang and Minchen Li and Song-Chun Zhu and Yixin Zhu and Min Tang and Dinesh Manocha and Chenfanfu Jiang},
-    title = {A Massively Parallel and Scalable Multi-GPU Material Point Method},
-    journal = {ACM Transactions on Graphics},
-    year = {2020},
-    volume = {39},
-    number = {4},
-    articleno = {Article 30}
-}
+If needed, modify numerical settings in `Settings.h` before compiling.
+```bash
+cd ..
+sh local_build.sh
 ```
 
-## Credits
-This project draws inspirations from [Taichi](https://github.com/taichi-dev/taichi), [GMPM](https://github.com/kuiwuchn/GPUMPM).
+✅ If the output shows **100% compilation**, ClaymoreUW has been successfully compiled.  
+> You can ignore any `sudo` password prompts.
 
+---
 
+## 5. Input File Generation
+```bash
+cd ./Projects/OSU_LWF/DigitalTwin/Test
+python generate_inputs.py
+```
 
-### Dependencies
-The following libraries are adopted in our project development:
+Verify that all input file folders have been created with `ls`.
 
-- [cub](http://nvlabs.github.io/cub/) (now replaced by Thrust)
-- [fmt](https://fmt.dev/latest/index.html)
+---
 
-For particle data IO and generation, we use these two libraries in addition:
+## 6. Submit sbatch Job
+```bash
+bash submit_all_jobs.sh
+```
 
-- [partio](http://partio.us/)
-- [SDFGen](https://github.com/christopherbatty/SDFGen)
+> You can modify simulation submission settings (e.g., node count, walltime) by editing the `.sh` file directly.
 
-Due to the C++ standard requirement (at most C++14) for compiling CUDA (10.2) code, we import these following libraries as well:
+---
 
-- [function_ref](https://github.com/TartanLlama/function_ref)
-- [optional](https://github.com/TartanLlama/optional)
-- [variant](https://github.com/mpark/variant)
+## 7. Check Simulation Status
+
+- **Check the queue:** `squeue -u [TACCID]`
+- **Check logs while running:** `cat logs/[job_name].out`
+- **Check errors if job fails:** `cat logs/[job_name].err`
+
+---
+
+## 8. Visualize Results
+
+*(Instructions coming soon)*
+
+---
+
+## Q&A
+
+1. **Troubleshooting during compilation**
+2. **How to edit numerical settings**
+3. **How to change simulation conditions**
+4. **How to run a draft simulation faster than waiting for the sbatch queue**
