@@ -40,13 +40,13 @@ set(CUDA_FOUND ${CMAKE_CUDA_COMPILER})
 #set(TARGET_CUDA_ARCH -gencode=arch=compute_75,code=compute_75)
 #set(TARGET_CUDA_ARCH -arch=sm_75)
 
-# ---------Lonestar6 TACC HPC - NVIDIA A100 40GB (Arch = Amper, CC = 8.0) - Univ. of Texas Austin - Justin Bonus
+# ---------Lonestar6 TACC HPC - NVIDIA A100 40GB (Arch = Amper, CC = 8.0) - Univ. of Texas Austin - Justin Bonus, Youngchul Choi
 #set(TARGET_CUDA_ARCH -gencode=arch=compute_80,code=sm_80)
-#set(TARGET_CUDA_ARCH -arch=sm_80)
+set(TARGET_CUDA_ARCH -arch=sm_80)
 
 # --------- Desktop PC - RTX 4060 ti 16GB GPU (Arch = Ada, CC = 8.9) - UW Seattle / UC Berkeley - Justin Bonus
 # set(TARGET_CUDA_ARCH --gpu-architecture=compute_89 --gpu-code=compute_89,sm_89)
-set(TARGET_CUDA_ARCH -arch=sm_89)
+# set(TARGET_CUDA_ARCH -arch=sm_89)
 
 # --------- ACCESS ACES - NVIDIA H100 80GB (Arch = Hopper, CC = 9.0) - Texas A&M University - Justin Bonus
 # set(TARGET_CUDA_ARCH --gpu-architecture=compute_90 --gpu-code=compute_90,sm_90)
