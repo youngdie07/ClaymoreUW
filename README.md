@@ -74,6 +74,7 @@ sh local_build.sh
 cd ./Projects/OSU_LWF/DigitalTwin/Test
 bash submit_checkpoint.sh
 ```
+This allows you to submit simulation run on lonestar6. You should wait for the squeue (usually takes about 0-2 days). Then wait for the simulation time you've requested through .sh file.
 ---
 ## 6-0. Install Python 
 
