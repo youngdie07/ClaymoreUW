@@ -71,8 +71,10 @@ sh local_build.sh
 ---
 ## 5. Run checkpoint simulation 
 ``` bash 
+cd ./Projects/OSU_LWF/DigitalTwin/Test
 bash submit_checkpoint.sh
 ```
+---
 
 ## 6-1. Input File (resume) Generation
 ```bash
