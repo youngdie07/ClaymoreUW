@@ -77,17 +77,25 @@ bash submit_checkpoint.sh
 This allows you to submit simulation run on lonestar6. You should wait for the squeue (usually takes about 0-2 days). Then wait for the simulation time you've requested through .sh file.
 
 ---
-## 6-0. Install Python 
+## 6-0. Set up cursor(VScode) and Python environment
 
+- In Cursor Window, turn on the file manager siderbar by clicking 'Menubar > View > Appearance > Primary sidebar'
+- See if you are at the Test directory
+- Open the 'generate_inputs.py' file editor
+- Tab the run button in the top right corner.
+- Set a Python Environment and if the run initialized, redo clicking the run botton
+- This will automatically open a python terminal and runs the python file. 
 
 ## 6-1. Input File Generation - create resume input files
 
-At the Test directory, 
-```bash
-python generate_inputs.py
-```
+When the 'generate_inputs.py' runs, it asks some option to choose.  
+- Example answers are
+   - Geometry: 'Cylinder'
+   - Adding sensors: 'N'
+   - Ending number: '128' 
 
-Verify that all input file folders have been created with `ls`.
+This will create 128 input files of cylinder cases based on the categorized simulations.
+Verify that all input file folders have been created within the Test directory.
 
 ## 6-2. Submit sbatch Job - run resume simulations
 ```bash
@@ -101,8 +109,11 @@ bash submit_all_jobs.sh
 ## 7. Check Simulation Status
 
 - **Check the queue:** `squeue -u [TACCID]`
-- **Check logs while running:** `cat logs/[job_name].out`
-- **Check errors if job fails:** `cat logs/[job_name].err`
+
+The following files are configured in the .sh file.  
+- **Check logs while running:** `[TACCID]/tmp/logs/[Date]/[job_name]/claymore.out`  
+- **Check errors if job fails:** `[TACCID]/tmp/logs/[Date]/[job_name]/claymore.err`
+- **Check GPUs usage in every 30 min while running:** `[TACCID]/tmp/logs/[Date]/[job_name]/gpu_usage.log`
 
 ---
 
@@ -118,3 +129,5 @@ bash submit_all_jobs.sh
 2. **How to edit numerical settings**
 3. **How to change simulation conditions**
 4. **How to run a draft simulation faster than waiting for the sbatch queue**
+5. **Any other comments**
+   Even though the .sh file is designed to run on 3 GPUs, TACC sometimes offers 2 GPU nodes, which results in a simulation failure. You can see this happen if you check the "gpu_usage.log" file in Step 7. This issue could not be resolved; you will likely need to resubmit the .sh file for the simulation.    
