@@ -1,0 +1,355 @@
+{
+	"simulation": {
+		"gpuid": 0,
+		"gravity": [0.0, -9.80665, 0.0],
+		"time": 10.0,
+		"fps": 2,
+		"frames": 100,
+		"default_dt": 2.0e-5,
+		"default_dx": 0.025,
+		"domain": [90, 3.0, 0.05],
+		"save_path": "./",
+		"save_suffix": ".bgeo",
+		"particles_output_exterior_only": false,
+		"froude_scaling": 1.0
+	},
+	"bodies": [
+		{
+			"gpu": 0,
+            "partition_start": [0.0, 0.0, 0.0],
+			"partition_end": [13.5, 2.0, 0.05],
+			"model": 0,
+			"type": "particles",
+			"color": "blue",
+			"constitutive": "JFluid",
+			"output_attribs": ["J", "Velocity_X", "Velocity_Y", "Velocity_Z", "JBar", "ID", "Position_X", "Position_Y", "Position_Z"],
+			"track_particle_id": [0],
+			"track_attribs": ["Position_X"],
+			"target_attribs": ["Position_Y"],
+			"material": {
+				"type": "particles",
+				"constitutive": "JFluid",
+				"ppc": 8.0000,
+				"CFL": 0.4,
+				"rho": 1000.0,
+				"bulk_modulus": 2.2e8,
+				"gamma": 7.15,
+				"viscosity": 0.001
+			},
+			"algorithm": {
+				"type": "particles",
+				"ppc": 8.0000,
+				"CFL": 0.4,
+				"use_FEM": false,
+				"use_ASFLIP": true,
+				"use_FBAR": true,
+				"ASFLIP_alpha": 0.995,
+				"ASFLIP_beta_min": 0.01,
+				"ASFLIP_beta_max": 0.2,
+				"FBAR_psi": 0.98,
+				"FBAR_fused_kernel": true
+			},
+			"velocity": [0.0, 0.0, 0.0],
+			"geometry": [
+                {
+					"object": "Box",
+					"operation": "Add",
+					"span": [88.1, 1.75, 0.05],
+					"offset": [1.9, 0.0, 0.0]
+				},
+				{
+					"object": "Bathymetry",
+					"operation": "Subtract",
+					"use_custom_bathymetry": true,
+                    "domain_start": [0,0,0],
+                    "domain_end": [90, 3.5, 0.05],
+                    "bathymetry": [
+                        [0.0, 0.1875],
+                        [19.70, 0.1875],
+                        [23.35, 0.1875],
+                        [34.35, 1.1375],
+                        [49.00, 1.7375],
+                        [74.60, 1.7375],
+                        [89.45, 2.6375],
+						[90.00, 2.6375]
+					]
+				}
+			]
+		},
+		{
+			"gpu": 1,
+            "partition_start": [13.5, 0.0, 0.0],
+			"partition_end": [26.0, 2.0, 0.05],
+			"model": 0,
+			"type": "particles",
+			"color": "blue",
+			"constitutive": "JFluid",
+			"output_attribs": ["J", "Velocity_X", "Velocity_Y", "Velocity_Z", "JBar", "ID", "Position_X", "Position_Y", "Position_Z"],
+			"track_particle_id": [0],
+			"track_attribs": ["Position_X"],
+			"target_attribs": ["Position_Y"],
+			"material": {
+				"type": "particles",
+				"constitutive": "JFluid",
+				"ppc": 8.0000,
+				"CFL": 0.4,
+				"rho": 1000.0,
+				"bulk_modulus": 2.2e8,
+				"gamma": 7.15,
+				"viscosity": 0.001
+			},
+			"algorithm": {
+				"type": "particles",
+				"ppc": 8.0000,
+				"CFL": 0.4,
+				"use_FEM": false,
+				"use_ASFLIP": true,
+				"use_FBAR": true,
+				"ASFLIP_alpha": 0.995,
+				"ASFLIP_beta_min": 0.01,
+				"ASFLIP_beta_max": 0.2,
+				"FBAR_psi": 0.98,
+				"FBAR_fused_kernel": true
+			},
+			"velocity": [0.0, 0.0, 0.0],
+			"geometry": [
+                {
+					"object": "Box",
+					"operation": "Add",
+					"span": [88.1, 1.75, 0.05],
+					"offset": [1.9, 0.0, 0.0]
+				},
+				{
+					"object": "Bathymetry",
+					"operation": "Subtract",
+					"use_custom_bathymetry": true,
+                    "domain_start": [0,0,0],
+                    "domain_end": [90, 3.5, 0.05],
+                    "bathymetry": [
+                        [0.0, 0.1875],
+                        [19.70, 0.1875],
+                        [23.35, 0.1875],
+                        [34.35, 1.1375],
+                        [49.00, 1.7375],
+                        [74.60, 1.7375],
+                        [89.45, 2.6375],
+						[90.00, 2.6375]
+					]
+				}
+			]
+		},
+		{
+			"gpu": 2,
+            "partition_start": [26.0, 0.0, 0.0],
+			"partition_end": [75.0, 2.0, 0.05],
+			"model": 0,
+			"type": "particles",
+			"color": "blue",
+			"constitutive": "JFluid",
+			"output_attribs": ["J", "Velocity_X", "Velocity_Y", "Velocity_Z", "JBar", "ID", "Position_X", "Position_Y", "Position_Z"],
+			"track_particle_id": [0],
+			"track_attribs": ["Position_X"],
+			"target_attribs": ["Position_Y"],
+			"material": {
+				"type": "particles",
+				"constitutive": "JFluid",
+				"ppc": 8.0000,
+				"CFL": 0.4,
+				"rho": 1000.0,
+				"bulk_modulus": 2.2e8,
+				"gamma": 7.15,
+				"viscosity": 0.001
+			},
+			"algorithm": {
+				"type": "particles",
+				"ppc": 8.0000,
+				"CFL": 0.4,
+				"use_FEM": false,
+				"use_ASFLIP": true,
+				"use_FBAR": true,
+				"ASFLIP_alpha": 0.995,
+				"ASFLIP_beta_min": 0.01,
+				"ASFLIP_beta_max": 0.2,
+				"FBAR_psi": 0.98,
+				"FBAR_fused_kernel": true
+			},
+			"velocity": [0.0, 0.0, 0.0],
+			"geometry": [
+                {
+					"object": "Box",
+					"operation": "Add",
+					"span": [88.1, 1.75, 0.05],
+					"offset": [1.9, 0.0, 0.0]
+				},
+				{
+					"object": "Bathymetry",
+					"operation": "Subtract",
+					"use_custom_bathymetry": true,
+                    "domain_start": [0,0,0],
+                    "domain_end": [90, 3.5, 0.05],
+                    "bathymetry": [
+                        [0.0, 0.1875],
+                        [19.70, 0.1875],
+                        [23.35, 0.1875],
+                        [34.35, 1.1375],
+                        [49.00, 1.7375],
+                        [74.60, 1.7375],
+                        [89.45, 2.6375],
+						[90.00, 2.6375]
+					]
+				}
+			]
+		}
+	],
+	"boundaries": [
+		{
+			"type": "grid",
+			"object": "Wall",
+			"contact": "Separable",
+			"domain_start": [0.0, 0.0, 0.0],
+			"domain_end": [90, 4.5, 0.05],
+			"time": [0, 180]
+		},
+		{
+			"type": "grid",
+			"object": "Bathymetry",
+			"contact": "Separable",
+			"use_custom_bathymetry": true,
+			"domain_start": [0, 0, 0],
+			"domain_end": [90, 4.5, 3.65],
+            "time": [0, 180],
+			"bathymetry": [
+				[0.0, 0.20],
+				[19.70, 0.20],
+				[23.35, 0.20],
+				[34.35, 1.15],
+				[49.00, 1.75],
+				[74.60, 1.75],
+				[89.45, 2.65],
+				[90.00, 2.65]
+			]
+		},
+		{
+			"type": "grid",
+			"object": "OSU Paddle",
+			"contact": "Separable",
+			"domain_start": [1.6, -0.2, -0.2],
+			"domain_end": [1.926, 5, 4],
+			"time": [0, 180],
+			"file": "../../../wmdisp_koh2025_W1_1200hz_long.csv",
+			"output_frequency": 1200
+		}
+	],
+	"grid-sensors": [
+        {
+            "attribute": "Velocity",
+            "direction": "X",
+            "domain_start": [52.6, 1.76, 0.0125],
+            "domain_end": [52.7, 3.0, 0.0375],
+            "name": "VelocityMeter1",
+            "operation": "Average",
+            "output_frequency": 1200,
+            "type": "grid"
+        },
+        {
+            "attribute": "Velocity",
+            "direction": "X",
+            "domain_start": [56.2, 1.76, 0.0125],
+            "domain_end": [56.3, 3.0, 0.0375],
+            "name": "VelocityMeter2",
+            "operation": "Average",
+            "output_frequency": 1200,
+            "type": "grid"
+        },
+		{
+			"type": "grid",
+            "name": "LoadCell1",
+			"attribute": "Force",
+			"operation": "Sum",
+			"direction": "X+",
+			"output_frequency": 1200,
+			"domain_start": [53.98, 1.76, 1.33],
+			"domain_end": [54.08, 2.37, 2.32]
+		},
+		{
+			"type": "grid",
+            "name": "LoadCell2",
+			"attribute": "Force",
+			"operation": "Sum",
+			"direction": "X-",
+			"output_frequency": 1200,
+			"domain_start": [54.90, 1.76, 1.33],
+			"domain_end": [55.00, 2.37, 2.32]
+		},
+        {
+            "attribute": "Velocity",
+            "direction": "X",
+            "domain_start": [56.2, 1.76, 0.0125],
+            "domain_end": [56.3, 3.0, 0.0375],
+            "name": "VelocityMeter3",
+            "operation": "Average",
+            "output_frequency": 1200,
+            "type": "grid"
+        }
+	],
+	"particle-sensors": [
+		{
+			"type": "particles",
+            "name": "WG1",
+			"attribute": "Elevation",
+			"operation": "Max",
+			"output_frequency": 1200,
+			"domain_start": [12.30, 1.7, 0.0125],
+			"domain_end":   [12.35, 3.0, 0.0375]
+		},
+		{
+			"type": "particles",
+            "name": "WG2",
+			"attribute": "Elevation",
+			"operation": "Max",
+			"output_frequency": 1200,
+			"domain_start": [30.60, 1.7, 0.0125],
+			"domain_end": [30.65, 3.0, 0.0375]
+
+		},
+		{
+			"type": "particles",
+            "name": "WG3",
+			"attribute": "Elevation",
+			"operation": "Max",
+			"output_frequency": 1200,
+			"domain_start": [37.90, 1.7, 0.0125],
+			"domain_end": [37.95, 3.0, 0.0375]
+
+		},
+		{
+			"type": "particles",
+            "name": "WG4",
+			"attribute": "Elevation",
+			"operation": "Max",
+			"output_frequency": 1200,
+			"domain_start": [41.55, 1.7, 0.0125],
+			"domain_end": [41.60, 3.0, 0.0375]
+
+		},
+		{
+			"type": "particles",
+            "name": "WG5",
+			"attribute": "Elevation",
+			"operation": "Max",
+			"output_frequency": 1200,
+			"domain_start": [52.60, 1.7, 0.0125],
+			"domain_end": [52.65, 3.0, 0.0375]
+
+		},
+		{
+			"type": "particles",
+            "name": "WG6",
+			"attribute": "Elevation",
+			"operation": "Max",
+			"output_frequency": 1200,
+			"domain_start": [56.20, 1.7, 0.0125],
+			"domain_end": [56.25, 3.0, 0.0375]
+		}
+	]
+}
