@@ -69,14 +69,14 @@ sh local_build.sh
 > You can ignore any `sudo` password prompts.
 
 ---
-## 5. Run checkpoint simulation 
+## 5. Submit sbatch Job - Run checkpoint simulation 
 ``` bash 
 cd ./Projects/OSU_LWF/DigitalTwin/Test
 bash submit_checkpoint.sh
 ```
 ---
 
-## 6-1. Input File (resume) Generation
+## 6-1. Input File Generation - create resume input files
 ```bash
 cd ./Projects/OSU_LWF/DigitalTwin/Test
 python generate_inputs.py
@@ -86,7 +86,7 @@ Verify that all input file folders have been created with `ls`.
 
 ---
 
-## 6-2. Submit sbatch Job
+## 6-2. Submit sbatch Job - run resume simulations
 ```bash
 bash submit_all_jobs.sh
 ```
