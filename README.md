@@ -75,16 +75,17 @@ cd ./Projects/OSU_LWF/DigitalTwin/Test
 bash submit_checkpoint.sh
 ```
 ---
+## 6-0. Install Python 
+
 
 ## 6-1. Input File Generation - create resume input files
+
+At the Test directory, 
 ```bash
-cd ./Projects/OSU_LWF/DigitalTwin/Test
 python generate_inputs.py
 ```
 
 Verify that all input file folders have been created with `ls`.
-
----
 
 ## 6-2. Submit sbatch Job - run resume simulations
 ```bash
