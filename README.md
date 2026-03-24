@@ -14,30 +14,34 @@
 | Houdini | https://www.sidefx.com/get/try-houdini/ |
 
 ---
-
 ## 3. Connecting via SSH
 
 1. Open **Cursor**
-2. Connect via SSH → Add new SSH host
+2. Open Primary sidebar and Add extensions
+   - Menubar > View > Appearance > Primary sidebar' to turn on the file manager siderbar
+   - Add extensions at the marketplace in the sidebar such as: 'Remote - SSH', 'WSL', 'Python', etc. 
+4. Connect via SSH → Add new SSH host
    - **Hostname (Server):** `ls6.tacc.utexas.edu`
    - **Port:** `22`
    - **Username:** your TACC ID
-3. Log in with your TACC password and approve via **Duo App**
-4. Open a Terminal (bash) window in Cursor
+   - MACs hmac-sha2-256,hmac-sha2-512,hmac-sha1
+5. Log in with your TACC password and approve via **Duo App**
+6. Click folder settings at the left sidebar and move to /scratch/your_number/[TACCID]
+7. Open a Terminal (bash) window in Cursor
+   - 'Menubar > Terminal > New Terminal' to open the terminal below
    - Run `pwd` to confirm your current directory
-   - Navigate to your scratch directory:
+   - Navigate to your scratch directory(if needed):
 ```bash
      cd /scratch/your_number/[TACCID]
 ```
 
 ---
-
 ## 4. Clone & Compile GitHub Repository
 
 ### Clone
 ```bash
 git clone https://github.com/youngdie07/ClaymoreUW.git
-ls  # Verify that the "claymoreUW" folder exists
+ls  # Verify that the "ClaymoreUW" folder exists
 ```
 
 ### Set Modules
@@ -49,7 +53,7 @@ module load gcc/12.2.0
 
 ### Build
 ```bash
-cd claymoreUW
+cd ClaymoreUW
 mkdir build
 cd build
 cmake ..
@@ -69,24 +73,20 @@ sh local_build.sh
 > You can ignore any `sudo` password prompts.
 
 ---
-## 5. Submit sbatch Job - Run checkpoint simulation 
+## 5. Run checkpoint simulation - Submit sbatch Job 
 ``` bash 
 cd ./Projects/OSU_LWF/DigitalTwin/Test
 bash submit_checkpoint.sh
 ```
-This allows you to submit simulation run on lonestar6. You should wait for the squeue (usually takes about 0-2 days). Then wait for the simulation time you've requested through .sh file.
+This allows you to submit simulation run on lonestar6. You should wait for the squeue (usually takes about 0-2 days). Then wait for the simulation time you've requested through .sh file (e.g. 48 hours).
 
 ---
-## 6-0. Set up cursor(VScode) and Python environment
-
-- In Cursor Window, turn on the file manager siderbar by clicking 'Menubar > View > Appearance > Primary sidebar'
-- See if you are at the Test directory
+## 6-1. Create resume input files 
+At the primary sidebar, move on to the Test directory
 - Open the 'generate_inputs.py' file editor
 - Tab the run button in the top right corner.
 - Set a Python Environment and if the run initialized, redo clicking the run botton
 - This will automatically open a python terminal and runs the python file. 
-
-## 6-1. Input File Generation - create resume input files
 
 When the 'generate_inputs.py' runs, it asks some option to choose.  
 - Example answers are
@@ -97,7 +97,7 @@ When the 'generate_inputs.py' runs, it asks some option to choose.
 This will create 128 input files of cylinder cases based on the categorized simulations.
 Verify that all input file folders have been created within the Test directory.
 
-## 6-2. Submit sbatch Job - run resume simulations
+## 6-2. Run resume simulations - Submit multiple sbatch jobs
 ```bash
 bash submit_all_jobs.sh
 ```
