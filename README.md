@@ -30,11 +30,11 @@ This repository contains a practical, step-by-step guide for **building and runn
 
 ### 1.2 Install recommended tools (free)
 
-| Tool | Link |
-|------|------|
-| Cursor | `https://cursor.com/download` |
-| Cyberduck | `https://cyberduck.io/download/` |
-| Houdini | `https://www.sidefx.com/get/try-houdini/` |
+| Tool      | Link                                  | Description                                                  |
+|-----------|---------------------------------------|--------------------------------------------------------------|
+| Cursor ai | `https://cursor.com/download`         | VScode Based AI code editor with SSH support; useful for remote development.  |
+| Cyberduck | `https://cyberduck.io/download/`      | GUI-based file transfer tool for SFTP/FTP/cloud connections.  |
+| Houdini   | `https://www.sidefx.com/get/try-houdini/` | 3D animation and VFX software; used for bgeo file visualization. |
 
 ### 1.3 Connect via SSH 
 
