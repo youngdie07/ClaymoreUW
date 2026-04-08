@@ -288,7 +288,7 @@ Some job scripts are written for **3 GPUs**, but LS6 allocations can sometimes l
 
 ### 8) Model Capacity and Memory Considerations
 
-The current example is set up to fully utilize 3 GPUs on LS6. If your simulation involves a fluid particle or grid domain larger than this example, you are likely to encounter GPU memory issues. In such cases, consider one of the following:
+The current example is set up to fully utilize 3 GPUs on LS6. If your simulation involves the number of particles  or grid domain larger than this example, you are likely to encounter GPU memory issues. In such cases, consider one of the following:
 
 - Utilize more capable HPC resources with greater memory/GPU capacity.
 - Use a smaller simulation domain.
