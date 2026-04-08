@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH -N 1 
+#SBATCH -n 1 
+#SBATCH -o allocs.log 
+#SBATCH -J allocs 
+#SBATCH -p gpu-a100
+#SBATCH -t 48:00:00 
+#SBATCH --mail-user=youngchulchoi@utexas.edu 
+#SBATCH --mail-type=all 
+#SBATCH -A DS-Jun-Whan-Lee       # Project/Allocation name (req'd if you have more than 1)
+
+# 모듈 로드
+module load cuda/12.2
+module load gcc/12.2.0
+
+# 실행 명령어 설정
+CUDA_VISIBLE_DEVICES=0,1,2 ibrun -n 1 python test.py --time 1:00:00
