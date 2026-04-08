@@ -285,3 +285,13 @@ Some job scripts are written for **3 GPUs**, but LS6 allocations can sometimes l
 
 - Check `gpu_usage.log` (if present in your workflow) to confirm the mismatch.
 - Workaround: **resubmit** until an appropriate node is assigned, or adjust the job script to match the available GPU layout.
+
+### 8) Model Capacity and Memory Considerations
+
+The current example is set up to fully utilize 3 GPUs on LS6. If your simulation involves a fluid particle or grid domain larger than this example, you are likely to encounter GPU memory issues. In such cases, consider one of the following:
+
+- Utilize more capable HPC resources with greater memory/GPU capacity.
+- Use a smaller simulation domain.
+- Adjust your simulation settings to be coarser—such as lowering the grid resolution or reducing the maximum particles-per-cell (PPC).
+
+Carefully managing model size and settings is essential to avoid memory-related failures on the current hardware.
