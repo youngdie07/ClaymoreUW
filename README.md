@@ -119,27 +119,30 @@ squeue -u <TACCID>
 ```
 
 
-## 4. Results (overview)
+## 4. Results 
 
 Outputs commonly include:
 
-- **SLURM logs**: `.out` and `.err`
-- **Result tables** (CSV formats)
+- **Timeseries tables** (CSV formats)
 - **Artifacts for visualization/animation** (obj, bgeo)
+- **SLURM logs**: `.out` and `.err`
+
 
 > For a deeper explanation of core modeling parameters, see Ch. 4 in [Bonus (2023)](https://ezproxy.lib.utexas.edu/login?url=https://www.proquest.com/dissertations-theses/evaluation-fluid-driven-debris-impacts-high/docview/2915819774/se-2?accountid=7118) or spreadsheet: https://utexas.box.com/s/bha49hqqh9xfiapuupxdpzoivz4jx0r6
 
-## 5. Example: Flume experiment (checkpoint → resume)
+---
+
+## Example: Flume experiment (checkpoint → resume)
 
 The example below runs a checkpoint simulation and then resumes from it across multiple cases.
 
-### 5.1 Submit checkpoint job
+### Submit checkpoint job
 ``` bash 
 cd ./Projects/OSU_LWF/DigitalTwin/Test
 bash submit_checkpoint.sh
 ```
 
-### 5.2 Generate resume inputs
+### Generate resume inputs
 
 ```bash
 cd ./Projects/OSU_LWF/DigitalTwin/Test
@@ -152,7 +155,7 @@ Verify that input folders were created:
 ls
 ```
 
-### 5.3 Submit resume jobs
+### Submit resume jobs
 
 ```bash
 bash submit_all_jobs.sh
@@ -160,7 +163,7 @@ bash submit_all_jobs.sh
 
 > You can modify submission settings (e.g., node count, walltime) by editing the `.sh` scripts directly.
 
-### 5.4 Monitor jobs and inspect logs
+### Monitor jobs and inspect logs
 
 ```bash
 squeue -u <TACCID>
@@ -168,7 +171,7 @@ cat logs/<job_name>.out
 cat logs/<job_name>.err
 ```
 
-### 5.5 Visualize
+### Visualize
 
 First, download the bgeo files to your local folder. 
 You can open Bgeo files in Houdini using the 'object' feature.
