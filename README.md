@@ -6,8 +6,11 @@ This repository contains a practical, step-by-step guide for **building and runn
   - Justin’s repo: [JustinBonus/claymore](https://github.com/JustinBonus/claymore)
   - Bonus, 2023 (dissertation): [Evaluation of Fluid-Driven Debris Impacts in High-Velocity Flows (ProQuest)](https://ezproxy.lib.utexas.edu/login?url=https://www.proquest.com/dissertations-theses/evaluation-fluid-driven-debris-impacts-high/docview/2915819774/se-2?accountid=7118)
 - **Related UI tool**: SimCenter **HydroUQ** (in development) combines water-borne simulation tooling (incl. ClaymoreUW) with uncertainty modeling: [https://simcenter.designsafe-ci.org/research-tools/hydro-uq/](https://simcenter.designsafe-ci.org/research-tools/hydro-uq/)
-- Previous tutorial materials: https://utexas.box.com/s/o6crp5ntpmnb5engtial675l5rp14mby
-
+- Previous tutorial materials:
+  - Slides: https://utexas.box.com/s/o6crp5ntpmnb5engtial675l5rp14mby
+  - Group meeting session: https://utexas.box.com/s/o3zph6mteoysql04kz6j717pgfx6ud6o
+  - Houdini Quick Guide: https://utexas.box.com/s/d6znj5s20xnmvggp84qxigxv32th5mbq
+    
 ## Typical workflow
 
 1. **Setup**
